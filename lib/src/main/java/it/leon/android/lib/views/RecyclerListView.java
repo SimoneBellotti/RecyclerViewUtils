@@ -5,9 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import it.leon.android.lib.adapters.RecyclerViewAdapter;
-import it.leon.android.lib.recyclerview.RecyclerViewHolder;
-
 /**
  * Created with Android Studio.
  * User: SimoneBellotti
@@ -74,7 +71,6 @@ public class RecyclerListView extends RecyclerView {
     public View getEmptyView() {
         return mEmptyView;
     }
-
 
 
     private AdapterDataObserver emptyObserver = new AdapterDataObserver() {

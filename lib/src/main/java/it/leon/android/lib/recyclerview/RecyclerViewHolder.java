@@ -12,8 +12,4 @@ public abstract class RecyclerViewHolder<T>
 
     public abstract void bindItem(T item);
 
-    public void setOnItemClickListener(View.OnClickListener listener) {
-        itemView.setOnClickListener(listener);
-    }
-
 }

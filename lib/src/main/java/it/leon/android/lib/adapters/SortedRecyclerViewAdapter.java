@@ -7,10 +7,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.List;
 
 import it.leon.android.lib.listeners.OnRecyclerViewItemClickListener;
 import it.leon.android.lib.listeners.OnRecyclerViewLongItemClickListener;
+import it.leon.android.lib.recyclerview.RecyclerViewHolder;
 
 /**
  * Created with Android Studio.
@@ -19,8 +24,8 @@ import it.leon.android.lib.listeners.OnRecyclerViewLongItemClickListener;
  * Time: 14.35
  * App:  RecyclerViewUtils
  */
-public abstract class SortedRecyclerViewAdapter<T, VH extends RecyclerView.ViewHolder>
-        extends RecyclerView.Adapter<VH>
+public abstract class SortedRecyclerViewAdapter<T>
+        extends RecyclerView.Adapter<RecyclerViewHolder<T>>
         implements View.OnClickListener, View.OnLongClickListener {
 
     protected Context context;
@@ -40,7 +45,23 @@ public abstract class SortedRecyclerViewAdapter<T, VH extends RecyclerView.ViewH
         }
     }
 
-    public abstract SortedListAdapterCallback<T> getComparator();
+    protected abstract SortedListAdapterCallback<T> getComparator();
+
+    protected abstract RecyclerViewHolder<T> getViewHolder(View itemView);
+
+    @Override
+    public RecyclerViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(resId, parent, false);
+        v.setOnClickListener(this);
+        v.setOnLongClickListener(this);
+        return getViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerViewHolder<T> holder, int position) {
+        T item = items.get(position);
+        holder.bindItem(item);
+    }
 
     public int add(T item) {
         return items.add(item);

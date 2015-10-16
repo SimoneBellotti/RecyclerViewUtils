@@ -57,6 +57,8 @@ public abstract class RecyclerViewAdapter<T>
     @Override
     public RecyclerViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(resId, parent, false);
+        v.setOnClickListener(this);
+        v.setOnLongClickListener(this);
         return getViewHolder(v);
     }
 
