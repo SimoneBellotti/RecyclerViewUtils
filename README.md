@@ -33,6 +33,8 @@ TODO
 - [ ] SectionedHeaderAdapter
 - [ ] StickySectionedHeaderAdapter
 - [ ] Drag & Swipe
+- [ ] EndlessAdapter
+
 
 
 License
