@@ -6,8 +6,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import it.leon.android.lib.listeners.OnRecyclerViewItemClickListener;
-
 /**
  * Created with Android Studio.
  * User: SimoneBellotti
@@ -18,15 +16,22 @@ import it.leon.android.lib.listeners.OnRecyclerViewItemClickListener;
 public class RecyclerItemClickListener<T> implements RecyclerView.OnItemTouchListener {
 
     GestureDetector mGestureDetector;
-    private OnRecyclerViewItemClickListener<T> mListener;
+    private OnRVItemClickListener<T> mListener;
 
-    public RecyclerItemClickListener(Context context, OnRecyclerViewItemClickListener<T> listener) {
+    public RecyclerItemClickListener(Context context, OnRVItemClickListener<T> listener) {
         mListener = listener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+                super.onLongPress(e);
+            }
+
+
         });
     }
 

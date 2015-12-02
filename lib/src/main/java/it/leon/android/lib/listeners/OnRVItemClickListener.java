@@ -8,6 +8,6 @@ import android.view.View;
  * Date: 25/03/2015
  * Time: 17.12
  */
-public interface OnRecyclerViewLongItemClickListener<T> {
-    void onLongItemClick(View view, T object);
+public interface OnRVItemClickListener<T> {
+    void onItemClick(View view, T object);
 }

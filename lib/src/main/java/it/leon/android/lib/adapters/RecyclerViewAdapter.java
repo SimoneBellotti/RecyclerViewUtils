@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import it.leon.android.lib.listeners.OnRecyclerViewItemClickListener;
-import it.leon.android.lib.listeners.OnRecyclerViewLongItemClickListener;
+import it.leon.android.lib.listeners.OnRVItemClickListener;
+import it.leon.android.lib.listeners.OnRVLongItemClickListener;
 import it.leon.android.lib.recyclerview.RecyclerViewHolder;
 
 /**
@@ -30,8 +30,8 @@ public abstract class RecyclerViewAdapter<T>
     protected Context context;
     protected int resId;
     protected ArrayList<T> items;
-    protected OnRecyclerViewItemClickListener<T> onItemClickListener;
-    protected OnRecyclerViewLongItemClickListener<T> onItemLongClickListener;
+    protected OnRVItemClickListener<T> onItemClickListener;
+    protected OnRVLongItemClickListener<T> onItemLongClickListener;
 
     public RecyclerViewAdapter(@NonNull Context context, @Nullable T[] items, @LayoutRes int resId) {
         this(context,
@@ -65,6 +65,7 @@ public abstract class RecyclerViewAdapter<T>
     @Override
     public void onBindViewHolder(RecyclerViewHolder<T> holder, int position) {
         T item = items.get(position);
+        holder.itemView.setTag(item);
         holder.bindItem(item);
     }
 
@@ -111,12 +112,12 @@ public abstract class RecyclerViewAdapter<T>
         return remove(items.indexOf(item));
     }
 
-    public RecyclerViewAdapter setOnItemClickListener(OnRecyclerViewItemClickListener<T> listener) {
+    public RecyclerViewAdapter setOnItemClickListener(OnRVItemClickListener<T> listener) {
         this.onItemClickListener = listener;
         return this;
     }
 
-    public RecyclerViewAdapter setOnItemLongClickListener(OnRecyclerViewLongItemClickListener<T> listener) {
+    public RecyclerViewAdapter setOnItemLongClickListener(OnRVLongItemClickListener<T> listener) {
         this.onItemLongClickListener = listener;
         return this;
     }

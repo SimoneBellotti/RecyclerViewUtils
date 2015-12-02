@@ -8,13 +8,13 @@ Utils classes for using **android.support.v7.widget.RecyclerView** widget
 that I used in my projects
 
 * Views
-    - RecyclerListView (support for EmptyView)
+    - RecyclerListView (support EmptyView)
 * Adapters
     - RecyclerViewAdapter
     - SortedRecyclerViewAdapter
 * Listeners
-    - OnRecyclerViewItemClickListener
-    - OnRecyclerViewLongItemClickListener
+    - OnRViewItemClickListener
+    - OnRViewLongItemClickListener
 
 Dependencies
 ------------

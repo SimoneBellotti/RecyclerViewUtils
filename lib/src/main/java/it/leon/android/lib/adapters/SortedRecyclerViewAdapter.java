@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
-import it.leon.android.lib.listeners.OnRecyclerViewItemClickListener;
-import it.leon.android.lib.listeners.OnRecyclerViewLongItemClickListener;
+import it.leon.android.lib.listeners.OnRVItemClickListener;
+import it.leon.android.lib.listeners.OnRVLongItemClickListener;
 import it.leon.android.lib.recyclerview.RecyclerViewHolder;
 
 /**
@@ -31,8 +29,8 @@ public abstract class SortedRecyclerViewAdapter<T>
     protected Context context;
     protected int resId;
     protected SortedList<T> items;
-    protected OnRecyclerViewItemClickListener<T> onItemClickListener;
-    protected OnRecyclerViewLongItemClickListener<T> onItemLongClickListener;
+    protected OnRVItemClickListener<T> onItemClickListener;
+    protected OnRVLongItemClickListener<T> onItemLongClickListener;
 
     public SortedRecyclerViewAdapter(@NonNull Context context, @Nullable T[] items, @LayoutRes int resId, Class<T> klazz) {
         this.items = new SortedList<>(klazz, getComparator());
@@ -60,6 +58,7 @@ public abstract class SortedRecyclerViewAdapter<T>
     @Override
     public void onBindViewHolder(RecyclerViewHolder<T> holder, int position) {
         T item = items.get(position);
+        holder.itemView.setTag(item);
         holder.bindItem(item);
     }
 
@@ -94,12 +93,12 @@ public abstract class SortedRecyclerViewAdapter<T>
         return false;
     }
 
-    public SortedRecyclerViewAdapter setOnItemClickListener(OnRecyclerViewItemClickListener<T> listener) {
+    public SortedRecyclerViewAdapter setOnItemClickListener(OnRVItemClickListener<T> listener) {
         this.onItemClickListener = listener;
         return this;
     }
 
-    public SortedRecyclerViewAdapter setOnItemLongClickListener(OnRecyclerViewLongItemClickListener<T> listener) {
+    public SortedRecyclerViewAdapter setOnItemLongClickListener(OnRVLongItemClickListener<T> listener) {
         this.onItemLongClickListener = listener;
         return this;
     }
