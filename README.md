@@ -4,17 +4,17 @@ RecyclerViewUtils
 Description
 -----------
 
-Utils classes for using **android.support.v7.widget.RecyclerView** widget 
-that I used in my projects
+Useful library for using **android.support.v7.widget.RecyclerView** widget 
 
 * Views
-    - RecyclerListView (support EmptyView)
+    - RecyclerListView (supports EmptyView)
 * Adapters
     - RecyclerViewAdapter
     - SortedRecyclerViewAdapter
 * Listeners
-    - OnRViewItemClickListener
-    - OnRViewLongItemClickListener
+    - RecyclerItemClickListener
+    - OnRVItemClickListener
+    - OnRVLongItemClickListener
 
 Dependencies
 ------------

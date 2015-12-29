@@ -22,41 +22,32 @@ import it.leon.android.lib.recyclerview.RecyclerViewHolder;
  * Time: 14.35
  * App:  RecyclerViewUtils
  */
-public abstract class SortedRecyclerViewAdapter<T>
-        extends RecyclerView.Adapter<RecyclerViewHolder<T>>
-        implements View.OnClickListener, View.OnLongClickListener {
+public abstract class SortedRecyclerViewAdapter<T, VH extends RecyclerViewHolder<T>>
+        extends RecyclerView.Adapter<VH> {
 
-    protected Context context;
     protected int resId;
     protected SortedList<T> items;
-    protected OnRVItemClickListener<T> onItemClickListener;
-    protected OnRVLongItemClickListener<T> onItemLongClickListener;
 
-    public SortedRecyclerViewAdapter(@NonNull Context context, @Nullable T[] items, @LayoutRes int resId, Class<T> klazz) {
+    public SortedRecyclerViewAdapter(@Nullable T[] items, @LayoutRes int resId, Class<T> klazz) {
         this.items = new SortedList<>(klazz, getComparator());
         this.resId = resId;
-        this.context = context;
         if (items != null) {
-            for (T obj : items) {
-                this.items.add(obj);
-            }
+            this.items.addAll(items);
         }
     }
 
     protected abstract SortedListAdapterCallback<T> getComparator();
 
-    protected abstract RecyclerViewHolder<T> getViewHolder(View itemView);
+    protected abstract VH getViewHolder(View itemView);
 
     @Override
-    public RecyclerViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(resId, parent, false);
-        v.setOnClickListener(this);
-        v.setOnLongClickListener(this);
-        return getViewHolder(v);
+    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(resId, parent, false);
+        return getViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder<T> holder, int position) {
+    public void onBindViewHolder(VH holder, int position) {
         T item = items.get(position);
         holder.itemView.setTag(item);
         holder.bindItem(item);
@@ -73,33 +64,5 @@ public abstract class SortedRecyclerViewAdapter<T>
     @Override
     public int getItemCount() {
         return items.size();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (onItemClickListener != null) {
-            T item = (T) v.getTag();
-            onItemClickListener.onItemClick(v, item);
-        }
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-        if (onItemLongClickListener != null) {
-            T item = (T) v.getTag();
-            onItemLongClickListener.onLongItemClick(v, item);
-            return true;
-        }
-        return false;
-    }
-
-    public SortedRecyclerViewAdapter setOnItemClickListener(OnRVItemClickListener<T> listener) {
-        this.onItemClickListener = listener;
-        return this;
-    }
-
-    public SortedRecyclerViewAdapter setOnItemLongClickListener(OnRVLongItemClickListener<T> listener) {
-        this.onItemLongClickListener = listener;
-        return this;
     }
 }

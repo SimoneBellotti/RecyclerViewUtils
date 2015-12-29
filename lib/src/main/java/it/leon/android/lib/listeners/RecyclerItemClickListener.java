@@ -31,15 +31,14 @@ public class RecyclerItemClickListener<T> implements RecyclerView.OnItemTouchLis
                 super.onLongPress(e);
             }
 
-
         });
     }
 
-    @Override public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
+    @Override
+    public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
         View childView = view.findChildViewUnder(e.getX(), e.getY());
         if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
-//            mListener.onItemClick(childView, view.getChildAdapterPosition(childView));
-            mListener.onItemClick(childView, (T) view.getTag());
+            mListener.onItemClick(childView, (T) childView.getTag());
         }
         return false;
     }
