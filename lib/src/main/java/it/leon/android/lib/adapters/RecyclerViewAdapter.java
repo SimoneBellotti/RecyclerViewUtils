@@ -51,7 +51,7 @@ public abstract class RecyclerViewAdapter<T, VH extends RecyclerViewHolder<T>>
         holder.bindItem(item);
     }
 
-//    @Override
+    //    @Override
 //    public void onBindViewHolder(VH holder, int position) {
 //        T item = items.get(position);
 //        holder.itemView.setTag(item);
